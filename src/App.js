@@ -33,8 +33,8 @@ function App() {
         </div>
       </div>
       <Routes>
-        <Route path={"demo"} element={<LayoutPage />}>
-          <Route path={"movies"} element={<Home />} />
+        <Route path={""} element={<LayoutPage />}>
+          <Route path={""} element={<Home />} />
           <Route path={":movieSlug"} element={<Detail />} />
           <Route path={"sort"} element={<FilterPage />} />
         </Route>

@@ -8,7 +8,7 @@ function Body(props) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("/demo/movies")
+    fetch("/demo")
       .then((response) => response.json())
       .then((data) => setMovies(data));
   }, []);
