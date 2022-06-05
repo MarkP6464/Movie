@@ -5,14 +5,6 @@ import { render } from "@testing-library/react";
 Body.propTypes = {};
 
 function Body(props) {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    fetch("/demo")
-      .then((response) => response.json())
-      .then((data) => setMovies(data));
-  }, []);
-
   return (
     <div class="container mx-auto mt-2 py-2 w-full">
       <div class="flex flex-col">
@@ -62,8 +54,7 @@ function Body(props) {
                 </thead>
 
                 <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-gray-600">
-                  {console.log(movies)}
-                  {movies.map((element) => {
+                  {props.data?.map((element) => {
                     return (
                       <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -100,7 +91,7 @@ function Body(props) {
                                 ></span>
                                 <img
                                   alt="Tiểu Thư Quạ Đen Và Tiên Sinh Thằn Lằn - Miss Crow With Mr. Lizard (2021)"
-                                  src={element.thumbUrl}
+                                  src={element.thumb_url}
                                   decoding="async"
                                   data-nimg="responsive"
                                   class="rounded-md"
@@ -128,13 +119,13 @@ function Body(props) {
                             <div class="ml-4">
                               <a
                                 title="Phim Tiểu Thư Quạ Đen Và Tiên Sinh Thằn Lằn - Miss Crow With Mr. Lizard (2021)"
-                                href={element.slug}
+                                href={"movie/" + element.slug}
                               >
                                 <h3 class="font-medium max-w-md overflow-hidden overflow-ellipsis whitespace-nowrap text-violet-500 hover:text-sky-500">
                                   {element.name}
                                 </h3>
                                 <h4 class="text-sm max-w-md overflow-hidden overflow-ellipsis whitespace-nowrap text-gray-500 dark:text-gray-200">
-                                  {"(" + element.originName + ")"}
+                                  {"(" + element.origin_name + ")"}
                                 </h4>
                               </a>
                             </div>
@@ -151,13 +142,13 @@ function Body(props) {
                           </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
-                          {element.categories.map((prop) => {
-                            return prop.categoryName + " ";
+                          {element.category?.map((prop) => {
+                            return prop.name + " ";
                           })}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">
-                          {element.countries.map((prop) => {
-                            return prop.countryName + " ";
+                          {element.country?.map((prop) => {
+                            return prop.name + " ";
                           })}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">

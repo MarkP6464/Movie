@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 Filter.propTypes = {};
 
@@ -32,7 +33,7 @@ function Filter(props) {
               <select
                 class="bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-white p-2 rounded-md outline-none"
                 id="filter-sort"
-                name="sort_field"
+                name="sortField"
               >
                 <option selected="" class="py-2" value="_id">
                   Phim mới nhất
@@ -51,12 +52,12 @@ function Filter(props) {
                 id="filter-eptype"
                 name="type"
               >
-                <option selected="" value="phim-moi">
+                <option selected="" value="">
                   Phim Mới
                 </option>
-                <option value="phim-bo">Phim Bộ</option>
-                <option value="phim-le">Phim Lẻ</option>
-                <option value="tv-shows">TV Shows</option>
+                <option value="series">Phim Bộ</option>
+                <option value="single">Phim Lẻ</option>
+                <option value="TV Shows">TV Shows</option>
                 <option value="hoat-hinh">Hoạt Hình</option>
                 <option value="phim-vietsub">Phim Vietsub</option>
                 <option value="phim-thuyet-minh">Phim Thuyết Minh</option>
@@ -76,28 +77,21 @@ function Filter(props) {
                 <option selected="" value="">
                   Toàn bộ Thể loại
                 </option>
-                <option value="hanh-dong">Hành Động</option>
-                <option value="tinh-cam">Tình Cảm</option>
-                <option value="hai-huoc">Hài Hước</option>
-                <option value="co-trang">Cổ Trang</option>
-                <option value="tam-ly">Tâm Lý</option>
-                <option value="hinh-su">Hình Sự</option>
-                <option value="chien-tranh">Chiến Tranh</option>
-                <option value="the-thao">Thể Thao</option>
-                <option value="vo-thuat">Võ Thuật</option>
-                <option value="vien-tuong">Viễn Tưởng</option>
-                <option value="phieu-luu">Phiêu Lưu</option>
-                <option value="khoa-hoc">Khoa Học</option>
-                <option value="kinh-di">Kinh Dị</option>
-                <option value="am-nhac">Âm Nhạc</option>
-                <option value="than-thoai">Thần Thoại</option>
-                <option value="tai-lieu">Tài Liệu</option>
-                <option value="gia-dinh">Gia Đình</option>
-                <option value="chinh-kich">Chính kịch</option>
-                <option value="bi-an">Bí ẩn</option>
-                <option value="hoc-duong">Học Đường</option>
-                <option value="kinh-dien">Kinh Điển</option>
-                <option value="phim-18">Phim 18+</option>
+                <option value="Hành Động">Hành Động</option>
+                <option value="Tình Cảm">Tình Cảm</option>
+                <option value="Hài Hước">Hài Hước</option>
+                <option value="Tâm Lý">Tâm Lý</option>
+                <option value="Hình Sự">Hình Sự</option>
+                <option value="Chiến Tranh">Chiến Tranh</option>
+                <option value="Thể Thao">Thể Thao</option>
+                <option value="Võ Thuật">Võ Thuật</option>
+                <option value="Viễn Tưởng">Viễn Tưởng</option>
+                <option value="Phiêu Lưu">Phiêu Lưu</option>
+                <option value="Khoa Học">Khoa Học</option>
+                <option value="Kinh Dị">Kinh Dị</option>
+                <option value="Gia Đình">Gia Đình</option>
+                <option value="Chính kịch">Chính kịch</option>
+                <option value="Bí ẩn">Bí ẩn</option>
               </select>
             </div>
             <div class="p-2">
@@ -109,41 +103,16 @@ function Filter(props) {
                 <option selected="" value="">
                   Toàn bộ Quốc gia
                 </option>
-                <option value="trung-quoc">Trung Quốc</option>
-                <option value="han-quoc">Hàn Quốc</option>
-                <option value="nhat-ban">Nhật Bản</option>
-                <option value="thai-lan">Thái Lan</option>
-                <option value="au-my">Âu Mỹ</option>
-                <option value="dai-loan">Đài Loan</option>
-                <option value="hong-kong">Hồng Kông</option>
-                <option value="an-do">Ấn Độ</option>
+                <option value="Trung Quốc">Trung Quốc</option>
+                <option value="Hàn Quốc">Hàn Quốc</option>
+                <option value="Nhật Bản">Nhật Bản</option>
+                <option value="Thái Lan">Thái Lan</option>
+                <option value="Âu Mỹ">Âu Mỹ</option>
+                <option value="Đài Loan">Đài Loan</option>
+                <option value="Hồng Kông">Hồng Kông</option>
+                <option value="Ấn Độ">Ấn Độ</option>
                 <option value="anh">Anh</option>
                 <option value="phap">Pháp</option>
-                <option value="canada">Canada</option>
-                <option value="quoc-gia-khac">Quốc Gia Khác</option>
-                <option value="duc">Đức</option>
-                <option value="tay-ban-nha">Tây Ban Nha</option>
-                <option value="tho-nhi-ky">Thổ Nhĩ Kỳ</option>
-                <option value="ha-lan">Hà Lan</option>
-                <option value="indonesia">Indonesia</option>
-                <option value="nga">Nga</option>
-                <option value="mexico">Mexico</option>
-                <option value="ba-lan">Ba lan</option>
-                <option value="uc">Úc</option>
-                <option value="thuy-dien">Thụy Điển</option>
-                <option value="malaysia">Malaysia</option>
-                <option value="brazil">Brazil</option>
-                <option value="philippines">Philippines</option>
-                <option value="bo-ao-nha">Bồ Đào Nha</option>
-                <option value="y">Ý</option>
-                <option value="dan-mach">Đan Mạch</option>
-                <option value="uae">UAE</option>
-                <option value="na-uy">Na Uy</option>
-                <option value="thuy-si">Thụy Sĩ</option>
-                <option value="chau-phi">Châu Phi</option>
-                <option value="nam-phi">Nam Phi</option>
-                <option value="ukraina">Ukraina</option>
-                <option value="a-rap-xe-ut">Ả Rập Xê Út</option>
               </select>
             </div>
             <div class="p-2">

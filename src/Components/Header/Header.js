@@ -16,14 +16,14 @@ function Header(props) {
                 chất lượng cao và không quảng cáo
               </span>
               <span class="font-bold">
-                <a href="/demo/movies">
+                <a href="/">
                   <img src={logo} class="w-[150px] h-[40px]" alt="Ổ Phim" />
                 </a>
               </span>
             </div>
             <div class="relative pointer-events-auto">
               <div class="relative hidden xl:block">
-                <form class="group relative" method="GET">
+                <form class="group relative" method="GET" action="/search">
                   <svg
                     width="20"
                     height="20"
@@ -39,10 +39,10 @@ function Header(props) {
                   </svg>
                   <input
                     type="text"
-                    value=""
                     class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 dark:text-slate-100 placeholder-slate-400 rounded-full py-2 pl-10 ring-1 ring-slate-200 dark:ring-slate-800 shadow-sm dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
                     aria-label="Tìm kiếm phim"
                     placeholder="Tìm kiếm phim..."
+                    name="keyword"
                   />
                 </form>
               </div>
@@ -53,7 +53,7 @@ function Header(props) {
                   <li>
                     <a
                       class="hover:text-sky-500 dark:hover:text-sky-400"
-                      href="/danh-sach/phim-bo"
+                      href="/sort?sortField=&type=&year=&category=&country="
                     >
                       Phim Bộ
                     </a>
@@ -61,7 +61,7 @@ function Header(props) {
                   <li>
                     <a
                       class="hover:text-sky-500 dark:hover:text-sky-400"
-                      href="/danh-sach/phim-le"
+                      href="/sort"
                     >
                       Phim Lẻ
                     </a>
@@ -69,7 +69,7 @@ function Header(props) {
                   <li>
                     <a
                       class="hover:text-sky-500 dark:hover:text-sky-400"
-                      href="/danh-sach/tv-shows"
+                      href="/sort"
                     >
                       Shows
                     </a>
@@ -77,7 +77,7 @@ function Header(props) {
                   <li>
                     <a
                       class="hover:text-sky-500 dark:hover:text-sky-400"
-                      href="/danh-sach/hoat-hinh"
+                      href="/sort"
                     >
                       Hoạt Hình
                     </a>

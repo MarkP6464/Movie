@@ -9,10 +9,11 @@ function Detail(props) {
   const location = useLocation();
 
   useEffect(() => {
-    fetch(location.pathname)
+    fetch("http://localhost:8080" + location.pathname)
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);
+        console.log(data);
       });
   }, []);
   return (
@@ -51,10 +52,10 @@ function Detail(props) {
                   }}
                 ></span>
                 <img
-                  alt={movie.name + " - " + movie.originName}
+                  alt={movie.name + " - " + movie.origin_name}
                   sizes="(max-width: 480px) 335px, (max-width: 1000px) 252px, 252px"
                   // srcSet="/_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=16&amp;q=75 16w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=32&amp;q=75 32w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=48&amp;q=75 48w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=64&amp;q=75 64w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=96&amp;q=75 96w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=128&amp;q=75 128w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=136&amp;q=75 136w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=160&amp;q=75 160w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=169&amp;q=75 169w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=192&amp;q=75 192w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=256&amp;q=75 256w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=384&amp;q=75 384w, /_next/image?url=https%3A%2F%2Fimg.ophim.tv%2Fuploads%2Fmovies%2Fco-nang-cua-toi-thumb.jpg&amp;w=684&amp;q=75 684w"
-                  src={movie.thumbUrl}
+                  src={movie.thumb_url}
                   decoding="async"
                   data-nimg="responsive"
                   class="w-full h-auto rounded-xl"
@@ -102,7 +103,7 @@ function Detail(props) {
                 <h1 class="uppercase text-lg font-bold text-violet-500">
                   {movie.name}
                 </h1>
-                <h2 class="italic text-sky-500">{movie.originName}</h2>
+                <h2 class="italic text-sky-500">{movie.origin_name}</h2>
               </div>
               <div class="overflow-hidden lg:overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-slate-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-slate-300 scrollbar-track:!rounded dark:scrollbar-track:!bg-slate-500/[0.16] dark:scrollbar-thumb:!bg-slate-500/50">
                 <table class="w-full text-left border-collapse">
@@ -142,7 +143,7 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.episodeTotal}
+                        {movie.episode_total}
                       </td>
                     </tr>
                     <tr class="border-t border-slate-200 dark:border-slate-400/20">
@@ -156,7 +157,7 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.time}
+                        {movie.time == "" ? "N/A" : movie.time}
                       </td>
                     </tr>
                     <tr class="border-t border-slate-200 dark:border-slate-400/20">
@@ -212,7 +213,7 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.directors?.map((prop) => {
+                        {movie.director?.map((prop) => {
                           return prop.name;
                         })}
                       </td>
@@ -228,8 +229,8 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.acts?.map((prop) => {
-                          return prop.name;
+                        {movie.actor?.map((prop) => {
+                          return prop.actor.name + ", ";
                         })}
                       </td>
                     </tr>
@@ -244,8 +245,8 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.categories?.map((prop) => {
-                          return prop.categoryName;
+                        {movie.category?.map((prop) => {
+                          return prop.name;
                         })}
                       </td>
                     </tr>
@@ -260,8 +261,8 @@ function Detail(props) {
                         translate="no"
                         class="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300"
                       >
-                        {movie.countries?.map((prop) => {
-                          return prop.countryName;
+                        {movie.country?.map((prop) => {
+                          return prop.name;
                         })}
                       </td>
                     </tr>
@@ -298,9 +299,7 @@ function Detail(props) {
                 class="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-gray-200"
                 id="headlessui-disclosure-panel-undefined"
               >
-                <article>
-                  {movie.content}
-                </article>
+                <article>{movie.content}</article>
               </div>
               <div>
                 <div class="mt-4">
@@ -338,23 +337,13 @@ function Detail(props) {
                         <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-16 gap-2">
                           <a
                             target="_blank"
-                            href="https://1080.hdphimonline.com/share/556fe7056165f3f6490139ca118e1c49"
-                            title="Xem phim Cô Nàng Của Tôi Tập 1"
-                            rel="noopener noreferrer"
-                            class="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
-                          >
-                            1
-                          </a>
-                          <a
-                            target="_blank"
-                            href="https://1080.hdphimonline.com/share/68a822664a3ea25fc51ef70282d26185"
+                            href={"nothing"}
                             title="Xem phim Cô Nàng Của Tôi Tập 2"
                             rel="noopener noreferrer"
                             class="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
                           >
                             2
                           </a>
-                          
                         </div>
                       </div>
                     </div>

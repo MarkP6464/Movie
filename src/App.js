@@ -10,6 +10,7 @@ import Home from "./Components/pages/Home/Home";
 import LayoutPage from "./Components/LayoutPage/LayoutPage";
 import FilterPage from "./Components/pages/Filter/FilterPage";
 import Detail from "./Components/pages/DetailPage/DetailPage";
+import SearchPage from "./Components/pages/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -34,9 +35,10 @@ function App() {
       </div>
       <Routes>
         <Route path={""} element={<LayoutPage />}>
-          <Route path={""} element={<Home />} />
-          <Route path={":movieSlug"} element={<Detail />} />
+          <Route index element={<Home />} />
+          <Route path={"movie/:movieSlug"} element={<Detail />} />
           <Route path={"sort"} element={<FilterPage />} />
+          <Route path={"search"} element={<SearchPage />} />
         </Route>
       </Routes>
     </div>
